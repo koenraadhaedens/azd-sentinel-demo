@@ -1,7 +1,7 @@
 param location string
 param workspaceName string
 
-resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-10-01-preview' = {
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: workspaceName
   location: location
   properties: {
@@ -10,16 +10,14 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-10-01-previ
       legacy: 0
     }
   }
-  sku: {
-    name: 'PerGB2018'
-  }
 }
 
 resource sentinel 'Microsoft.SecurityInsights/workspaces@2022-12-01-preview' = {
-  name: logAnalytics.name
+  name: workspaceName  // Same name as the workspace
   location: location
   properties: {}
 }
 
+// Outputs to be used in main.bicep
 output workspaceId string = logAnalytics.id
 output workspaceName string = logAnalytics.name
