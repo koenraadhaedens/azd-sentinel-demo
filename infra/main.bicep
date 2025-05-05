@@ -7,6 +7,9 @@ param environmentName string
 @minLength(1)
 @description('Primary location for all resources')
 param location string
+@secure()
+@description('Admin password for the virtual machine')
+param adminPassword string
 
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: 'rg-${environmentName}'
@@ -34,3 +37,15 @@ module bruteForceRule 'brute-force-rule.bicep' = {
 }
 
 output workspaceId string = logAnalyticsModule.outputs.workspaceId
+
+
+
+module vmDeployment 'vm-windows.bicep' = {
+  name: 'WindowsVmDeployment'
+  scope: rg
+  params: {
+    location: location
+    workspaceId: logAnalyticsModule.outputs.workspaceId
+    adminPassword: adminPassword
+    }
+}

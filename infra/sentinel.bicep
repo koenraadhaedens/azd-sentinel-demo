@@ -25,3 +25,4 @@ resource sentinelOnboarding 'Microsoft.SecurityInsights/onboardingStates@2022-01
 
 // Outputs to be used in main.bicep
 output workspaceId string = logAnalyticsWorkspace.id
+
