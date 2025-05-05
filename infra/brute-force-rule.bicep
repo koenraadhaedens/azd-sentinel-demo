@@ -1,6 +1,5 @@
 param workspaceName string
 
-
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' existing = {
   name: workspaceName
 }
@@ -11,13 +10,13 @@ resource analyticRule 'Microsoft.SecurityInsights/alertRules@2023-02-01-preview'
   kind: 'Scheduled'
   properties: {
     displayName: 'Brute Force Attack Detection'
-    description: 'Detects multiple failed login attempts from the same IP address within a short time window'
+    description: 'Detects multiple failed login attempts for the same account within a short time window'
     enabled: true
     query: '''
       SecurityEvent
       | where EventID == 4625
       | where AccountType == "User"
-      | summarize FailedAttempts = count() by TargetAccount, IPAddress = tostring(AdditionalFields["IpAddress"]), bin(TimeGenerated, 5m)
+      | summarize FailedAttempts = count() by TargetAccount, bin(TimeGenerated, 5m)
       | where FailedAttempts > 5
     '''
     queryFrequency: 'PT5M'
@@ -36,7 +35,7 @@ resource analyticRule 'Microsoft.SecurityInsights/alertRules@2023-02-01-preview'
         reopenClosedIncident: false
         lookbackDuration: 'PT1H'
         matchingMethod: 'Selected'
-        groupByEntities: ['Account', 'IP']
+        groupByEntities: ['Account']
       }
     }
     customDetails: {
