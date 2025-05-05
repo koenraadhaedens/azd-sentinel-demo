@@ -1,16 +1,18 @@
+param name string
 param location string
-param workspaceName string
+param sku string
+param tags object
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' = {
-  name: workspaceName
+  name: name
   location: location
+  tags: tags
   properties: {
     sku: {
       name: sku
     }
   }
 }
-
 
 // Outputs to be used in main.bicep
 output workspaceId string = logAnalytics.id
