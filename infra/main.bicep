@@ -33,6 +33,9 @@ module bruteForceRule 'brute-force-rule.bicep' = {
     workspaceName: logAnalyticsWorkspaceName
   }
   scope: rg
+  dependsOn: [
+    logAnalyticsModule  // Ensures bruteForceRule deployment depends on logAnalyticsModule
+  ]
 }
 
 output workspaceId string = logAnalyticsModule.outputs.workspaceId
