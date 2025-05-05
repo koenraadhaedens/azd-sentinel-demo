@@ -34,7 +34,7 @@ resource vmNic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
         properties: {
           privateIPAllocationMethod: 'Dynamic'
           subnet: {
-            id: '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Network/virtualNetworks/vnet-main/subnets/default'
+            id: vnet.properties.subnets[0].id
           }
         }
       }
