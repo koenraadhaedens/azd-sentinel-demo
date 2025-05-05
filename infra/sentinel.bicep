@@ -16,4 +16,3 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2017-03
 
 // Outputs to be used in main.bicep
 output workspaceId string = logAnalyticsWorkspace.id
-output workspaceName string = logAnalyticsWorkspace.name
