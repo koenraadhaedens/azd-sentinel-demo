@@ -5,9 +5,7 @@ metadata:
 infra:
    provider: "bicep"
 
-
-
-#hooks:
+hooks:
  # postprovision:
   #  shell: pwsh
    # run: ./postprovision.ps1
