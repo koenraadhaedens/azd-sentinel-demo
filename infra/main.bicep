@@ -29,7 +29,6 @@ module bruteForceRule 'brute-force-rule.bicep' = {
   name: 'BruteForceDetectionRule'
   params: {
     workspaceName: logAnalyticsWorkspaceName
-    location: location
   }
   scope: rg
 }
