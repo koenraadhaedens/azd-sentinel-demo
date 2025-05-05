@@ -23,3 +23,5 @@ module logAnalyticsModule 'sentinel.bicep' = {
   }
   scope: rg
 }
+
+output workspaceId string = logAnalyticsModule.outputs.workspaceId

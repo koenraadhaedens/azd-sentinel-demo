@@ -20,3 +20,6 @@ resource sentinel 'Microsoft.SecurityInsights/workspaces@2022-12-01-preview' = {
   location: location
   properties: {}
 }
+
+output workspaceId string = logAnalytics.id
+output workspaceName string = logAnalytics.name
