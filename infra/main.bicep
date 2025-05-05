@@ -25,4 +25,13 @@ module logAnalyticsModule 'sentinel.bicep' = {
   scope: rg
 }
 
+module bruteForceRule 'brute-force-rule.bicep' = {
+  name: 'BruteForceDetectionRule'
+  params: {
+    workspaceName: logAnalyticsWorkspaceName
+    location: location
+  }
+  scope: rg
+}
+
 output workspaceId string = logAnalyticsModule.outputs.workspaceId
