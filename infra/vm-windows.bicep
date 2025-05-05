@@ -83,12 +83,12 @@ resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2022-08-01' =
   parent: vm
   location: location
   properties: {
-    publisher: 'Microsoft.Azure.Diagnostics'
-    type: 'AzureMonitorWindowsAgent'
-    typeHandlerVersion: '1.0'
+    publisher: 'Microsoft.Azure.Monitoring'  // Correct publisher for AMA
+    type: 'AzureMonitorWindowsAgent'         // Correct type for AMA
+    typeHandlerVersion: '1.10'
     autoUpgradeMinorVersion: true
     settings: {
-      workspaceId: workspaceId  // Only workspace ID is required for AMA
+      workspaceId: workspaceId  // Only workspaceId is required
     }
   }
 }
