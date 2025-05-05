@@ -13,7 +13,8 @@ resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   location: location
 }
 
-param logAnalyticsWorkspaceName string = 'law-${uniqueString(resourceGroup().id)}'
+param logAnalyticsWorkspaceName string = 'law-${uniqueString(environmentName)}'
+
 
 module logAnalyticsModule 'sentinel.bicep' = {
   name: 'logAnalyticsDeployment'
