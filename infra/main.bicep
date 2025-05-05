@@ -1,4 +1,18 @@
-param location string = resourceGroup().location
+targetScope = 'subscription'
+
+@minLength(1)
+@maxLength(64)
+@description('Name of the environment that can be used as part of naming resource convention')
+param environmentName string
+@minLength(1)
+@description('Primary location for all resources')
+param location string
+
+resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: 'rg-${environmentName}'
+  location: location
+}
+
 param logAnalyticsWorkspaceName string = 'law-${uniqueString(resourceGroup().id)}'
 
 module logAnalyticsModule 'sentinel.bicep' = {
@@ -7,4 +21,5 @@ module logAnalyticsModule 'sentinel.bicep' = {
     location: location
     workspaceName: logAnalyticsWorkspaceName
   }
+  scope: rg
 }
