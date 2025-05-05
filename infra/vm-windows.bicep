@@ -4,6 +4,26 @@ param workspaceId string
 param adminPassword string
 param adminUsername string = 'azadmin'
 
+resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+  name: 'vnet-main'
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        '10.0.0.0/16'
+      ]
+    }
+    subnets: [
+      {
+        name: 'default'
+        properties: {
+          addressPrefix: '10.0.1.0/24'
+        }
+      }
+    ]
+  }
+}
+
 resource vmNic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
   name: 'nic-vm'
   location: location
